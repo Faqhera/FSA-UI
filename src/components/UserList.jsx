@@ -3,7 +3,9 @@ import axios from 'axios';
 import UserCard from './UserCard';
 
 class UserList extends React.Component {
-    constructor(){
+    //constructor(props){
+    constructor(props){
+
         super();
         this.state = {
             users:[],
@@ -17,7 +19,9 @@ render(){
           <div className="flex flex-wrap gap-8 mt-10">
              {this.state.users.map ((usr,index) => (
               // <p key={index}>{usr.login}</p>
-            <UserCard key={index} usr={usr}/>
+            //<UserCard key={index} usr={usr} a={this.props.a}/>
+            <UserCard key={index} usr={usr} />
+
             ))}
           </div>
         </>

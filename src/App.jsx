@@ -4,33 +4,35 @@ import Language from './components/Language';
 //import  Person from "./components/Person";
 import UserList from "./components/UserList";
 import User from "./components/User";
-
 //import Counter from "./components/Counter"
 import Count from "./components/Count"
-
 import NotFound from "./components/NotFound"
 import {Route,Routes, Link} from "react-router-dom"
 import Contact from './components/Contact';
+import {useState} from "react";
+import {UserContext} from "./userContext"
+import EForm from './components/EForm';
 
-
-function App() {  //parent
 //const bool = false;
-
-  //return (
-    //<>
-    //{bool ? <Home />: null}
-      {/*<Person val ={"Tarannum"} />*/}
-      {/*<Language/>*/}
-      {/*<Counter/>*/}
-      {/*<Counter count={0}/>*/}
-      {/*<Counter count={2}/>*/}
-      {/*<Counter count={0} value={10} />*/}
-    //<UserList/>
-   //</>
-
+//return (
+  //<>
+  //{bool ? <Home />: null}
+  {/*<Person val ={"Tarannum"} />*/}
+  {/*<Language/>*/}
+  {/*<Counter/>*/}
+  {/*<Counter count={0}/>*/}
+  {/*<Counter count={2}/>*/}
+  {/*<Counter count={0} value={10} />*/}
+  //<UserList/>
+  //</>
+  //let a = 10;
+  
+  function App() {  
+  const [a, setA] = useState(10);
    return(
     <>
-    <nav>
+    <UserContext.Provider value ={{a, setA}}>
+         <nav>
       
 <nav className="bg-white border-gray-200 dark:bg-gray-900">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -62,18 +64,19 @@ function App() {  //parent
     </div>
   </div>
 </nav>
-
-    </nav>
+         </nav>
       <Routes>
         {/*<Route path="/" exact element={<Counter count={1} value={1} />}/>*/}
         <Route path="/" exact element={<Count count={1} value={1} />}/>
-
-         <Route path="/users" exact element={<UserList/>} />
+         <Route path="/users" exact element={<UserList a={a}/>} />
          <Route path="/users/:username"exact element={<User/>} />
          <Route path="/lang" exact element={<Language/>} />
+         <Route path="/form" exact element={<EForm/>} />
         <Route path="/contact" exact element={<Contact/>} />
+
         <Route path="*" element={<NotFound/>} />
       </Routes>
+    </UserContext.Provider>
     </>
    );
   }
